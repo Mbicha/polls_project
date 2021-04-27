@@ -1,0 +1,28 @@
+from django.db import models
+
+class Poll(models.Model):
+    question = models.TextField()
+    option_one = models.CharField(max_length=50)
+    option_two = models.CharField(max_length=50)
+    option_three = models.CharField(max_length=50)
+    option_one_count = models.IntegerField(default=0)
+    option_two_count = models.IntegerField(default=0)
+    option_three_count = models.IntegerField(default=0)
+
+    def total(self):
+        return self.option_one_count + self.option_two_count + self.option_three_count
+
+    def popularity_option_one(self):
+        total = self.option_one_count + self.option_two_count + self.option_three_count
+        popularity_option_one = self.option_one_count/total*100
+        return popularity_option_one
+
+    def popularity_option_two(self):
+        total = self.option_one_count + self.option_two_count + self.option_three_count
+        popularity_option_two = self.option_two_count/total*100
+        return popularity_option_two  
+
+    def popularity_option_three(self):
+        total = self.option_one_count + self.option_two_count + self.option_three_count
+        popularity_option_three = self.option_three_count/total*100
+        return popularity_option_three     
